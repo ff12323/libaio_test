@@ -14,7 +14,9 @@ long long get_fs_limit(int fd)
 		if (pwrite64(fd, &c, 1, (min + max) / 2) == -1)
 			max = (min + max) / 2;
 		else {
-			ftruncate(fd, 0);
+			int res = ftruncate(fd, 0);
+			if(res == 1)
+			    ;
 			min = (min + max) / 2;
 		}
 	}

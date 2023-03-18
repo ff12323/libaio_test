@@ -1,0 +1,22 @@
+{
+    "files.associations": {
+      "*.t": "c",
+      "syscall-x86_64.h": "c",
+      "aio_setup.h": "c",
+      "numbers": "c",
+      "stderrmsg.h": "c",
+      "pthread.h": "c",
+      "unistd.h": "c",
+      "stdio.h": "c",
+      "errno.h": "c",
+      "errno-base.h": "c",
+      "cerrno": "c",
+      "array": "c",
+      "deque": "c",
+      "string": "c",
+      "unordered_map": "c",
+      "vector": "c",
+      "string_view": "c",
+      "initializer_list": "c"
+    }
+}

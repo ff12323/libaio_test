@@ -8,3 +8,8 @@
 
 /src/libaio.a
 /src/libaio.so*
+
+*.p
+a
+aio.txt*
+tmp111

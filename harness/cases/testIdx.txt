@@ -1,0 +1,45 @@
+
+2: abnormal test
+
+3: invalid addresses test
+
+4: check read && write permission, and O_APPEND is useful
+
+5: Write from a mmap() of the same file
+  pre-Req: mmap, munmap
+
+6: huge read && write
+ pre-Req: /proc/meminfo
+
+7: EFBIG, ... ???
+
+10: ENOSPC test, and go over test
+
+11: repeated read / write of same page (to check accounting)
+  self-Ask: what's the meaning???
+
+12: ioctx access across fork()
+
+13: Submit multiple writes
+
+14:
+  pre-Req: sigemptyset, sigaddset, sigprocmask, fflush, fork, waitpid, wait.h
+
+15: pwritev and preadv tests.
+  pre-Req: struct iovec, ...
+
+16: eventfd tests.
+  pre-Req: syscall, alarm
+
+17:
+ pre-Req: mmap, aio_ring, ftruncate, unlink
+ concepts: hung task
+
+18: 
+  pre-Req: pthread, __attribute__((aligned(PAGE_SIZE)))
+  concepts: Outstanding IO
+    Outstanding IO commands are commands that are "in-flight" i.e. IO requests 
+    (for read or write) that have been sent to the storage, but haven't yet completed.
+
+19: aio_ring testCase
+  pre-Request: sig_atomic_t, mmap, mremap, signal, alarm, sched_yield
