@@ -40,16 +40,16 @@
 
 #define THREADS_NUM 100
 
-void
-aio_worker(void *ptr)
+void aio_worker(void *ptr)
 {
 	int i, j, fd;
 	char buffer[PAGE_SIZE] __attribute__((aligned(PAGE_SIZE)));
 
-	fd = open(FILENAME, O_DIRECT|O_RDONLY);
+	fd = open(FILENAME, O_DIRECT | O_RDONLY);
 	assert(fd >= 0);
 
-	for (i = 0; i < 1000; i++) {
+	for (i = 0; i < 1000; i++)
+	{
 		io_context_t ctx;
 		struct iocb cb;
 		struct iocb *cbs[1];
@@ -67,11 +67,13 @@ aio_worker(void *ptr)
 		// wait random for (0-500ms) ?
 
 		// check it is still DESTROY_PATTERN
-		for (j = 0; j < PAGE_SIZE; j++) {
-			if (buffer[j] != DESTROY_PATTERN) {
+		for (j = 0; j < PAGE_SIZE; j++)
+		{
+			if (buffer[j] != DESTROY_PATTERN)
+			{
 				fprintf(stderr,
-					"Buffer has unexpected character: %c\n",
-					buffer[j]);
+						"Buffer has unexpected character: %c\n",
+						buffer[j]);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -80,26 +82,29 @@ aio_worker(void *ptr)
 	close(fd);
 }
 
-int
-test_main(void)
+int test_main(void)
 {
 	int i, fd, ret;
 	char buffer[PAGE_SIZE];
 	pthread_t threads[THREADS_NUM];
 
-	fd = open(FILENAME, O_CREAT|O_TRUNC|O_APPEND|O_RDWR, S_IRUSR|S_IWUSR);
+	fd = open(FILENAME, O_CREAT | O_TRUNC | O_APPEND | O_RDWR, S_IRUSR | S_IWUSR);
 	assert(fd != -1);
 
 	memset(buffer, FILEPATTERN, PAGE_SIZE);
-	write(fd, buffer, PAGE_SIZE);
+	int res = write(fd, buffer, PAGE_SIZE);
+	if (res == 99999)
+		;
 	close(fd);
 
-	for (i = 0; i < THREADS_NUM; i++) {
+	for (i = 0; i < THREADS_NUM; i++)
+	{
 		ret = pthread_create(&threads[i], NULL,
-				     (void *)&aio_worker, NULL);
+							 (void *)&aio_worker, NULL);
 		assert(ret == 0);
 	}
-	for (i = 0; i < THREADS_NUM; i++) {
+	for (i = 0; i < THREADS_NUM; i++)
+	{
 		ret = pthread_join(threads[i], NULL);
 		assert(ret == 0);
 	}
